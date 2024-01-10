@@ -24,26 +24,29 @@ class User(UserMixin, db.Model):
     experience = db.relationship('Experience', backref='user', lazy=True, cascade="all, delete")
     msg_board = db.relationship('Msg_board', backref='user', lazy=True, cascade="all, delete")
     
-    @property # Allows the method to be accessed like an attribute.
-    def password(self): 
-        """
-        A security measure to prevent the password from being accessed directly.
-        """
-        raise AttributeError('Password is not allowed to read.')
-    
-    @password.setter # Allows the method to be called when you assign a value to the property.
-    def password(self, psw):
-        """
-        A security measure to hashes the password and stores the hash in the hashed_psw attribute. 
-        """
-        self.hashed_psw = generate_password_hash(psw)
-        return None
-
+    def set_password(self, psw):
+        self.hashed_psw = generate_password_hash(psw, method='pbkdf2')
+        
     def verify_password(self, psw) -> bool:
         """
         It hashes the input password as the stored hash and checks if the results match. 
         """
         return check_password_hash(self.hashed_psw, psw)
+    
+    # @property # Allows the method to be accessed like an attribute.
+    # def password(self): 
+    #     """
+    #     A security measure to prevent the password from being accessed directly.
+    #     """
+    #     raise AttributeError('Password is not allowed to read')
+    
+    # @password.setter # Allows the method to be called when you assign a value to the property.
+    # def password(self, psw):
+    #     """
+    #     A security measure to hashes the password and stores the hash in the hashed_psw attribute. 
+    #     """
+    #     self.hashed_psw = generate_password_hash(psw, method='pbkdf2:sha256:150000')
+    #     return None
     
 class Education(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -81,7 +84,7 @@ class Msg_board(db.Model):
         return f"Msg to user {self.user_id} about {self.title} from {self.name}"
     
 @login_manager.user_loader # This callback is used to reload the user object from the user ID stored in the session.
-def load_user(user_id) -> User(object)| None:
+def load_user(user_id):
     """
     Load a user from the database based on the user_id stored in the session.
     """

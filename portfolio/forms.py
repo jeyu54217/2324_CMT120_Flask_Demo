@@ -6,7 +6,7 @@ Developed by Jerry Yu @ https://github.com/jeyu54217
 Developed for Coursework 2 of the CMT120 course at Cardiff University
 
 Reference: 
-    wtforms fields : https://wtforms.readthedocs.io/en/3.1.x/fields/
+    1. wtforms fields : https://wtforms.readthedocs.io/en/3.1.x/fields/
 """
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, DateField

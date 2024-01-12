@@ -38,10 +38,9 @@ interaction.
     ```
 ## Screenshot
 ### Home Page
-
 <img width="1649" alt="Screenshot 2024-01-12 at 08 40 20" src="https://github.com/jeyu54217/2324_CMT120_Flask_Demo/assets/73396926/8456e8d5-654c-4461-8df3-2e2742ebcf77">
-### Login
 
+### Login
 <img width="1685" alt="Screenshot 2024-01-12 at 08 40 57" src="https://github.com/jeyu54217/2324_CMT120_Flask_Demo/assets/73396926/24111655-71d1-404e-a0eb-3f3c84336610">
 
 ### Edit Content

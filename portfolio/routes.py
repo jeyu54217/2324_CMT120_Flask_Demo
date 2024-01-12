@@ -11,10 +11,10 @@ References:
     3. flask_login: https://flask-login.readthedocs.io/en/latest/
     4. werkzeug.security: https://werkzeug.palletsprojects.com/en/3.0.x/utils/#module-werkzeug.security
 """
-from flask import Blueprint, render_template, url_for, redirect, session, send_file, flash, request
+from flask import Blueprint, render_template, url_for, redirect, flash, request
 from . import app, db
-from .models import User, Experience, Education, Msg_board 
-from .forms import Login_form, Edu_form, Exp_form, Msg_form
+from .models import User, Experience, Education
+from .forms import Login_form, Edu_form, Exp_form
 from flask_login import login_user, logout_user, current_user, login_required
 
 bp_home = Blueprint('/', __name__, template_folder='templates', static_folder='static')
@@ -28,6 +28,7 @@ def home():
                            exps = admin.experience,
                            )
     
+# LOGIN
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = Login_form()
@@ -43,7 +44,7 @@ def login():
             return redirect(url_for('login'))
     return render_template('login.html', form=form)
 
-
+# LOGOUT
 @app.route("/logout")
 @login_required
 def logout():
@@ -51,6 +52,8 @@ def logout():
     flash('Logout successful!', 'success')
     return redirect(url_for('home'))
 
+
+# EDIT EDUCATION
 @app.route("/edu_edit", methods=['GET', 'POST'])
 @login_required
 def edu_edit():
@@ -75,6 +78,8 @@ def edu_edit():
                            edu_form = edu_form,
                            )
 
+
+# EDIT EDUCATION
 @app.route("/exp_edit", methods=['GET', 'POST'])
 @login_required
 def exp_edit():
@@ -99,6 +104,8 @@ def exp_edit():
                            exp_form = exp_form,
                            )
 
+
+# DELETE EDUCATION
 @app.route('/delete_experience', methods=['POST'])
 @login_required
 def delete_experience():
@@ -110,6 +117,8 @@ def delete_experience():
     flash('Delete Experience successful!', 'success')
     return redirect(url_for('exp_edit'))
 
+
+# DELETE EXPERIENCE
 @app.route('/delete_education', methods=['POST'])
 @login_required
 def delete_education():

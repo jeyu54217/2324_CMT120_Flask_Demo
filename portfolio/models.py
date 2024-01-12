@@ -23,7 +23,7 @@ class User(UserMixin, db.Model):
     hashed_psw = db.Column(db.String(128))
     education = db.relationship('Education', backref='user', lazy=True, cascade="all, delete")
     experience = db.relationship('Experience', backref='user', lazy=True, cascade="all, delete")
-    msg_board = db.relationship('Msg_board', backref='user', lazy=True, cascade="all, delete")
+    # msg_board = db.relationship('Msg_board', backref='user', lazy=True, cascade="all, delete")
     
     def set_password(self, psw):
         self.hashed_psw = generate_password_hash(psw, method='pbkdf2')

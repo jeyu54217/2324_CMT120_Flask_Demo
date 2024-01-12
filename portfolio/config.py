@@ -1,12 +1,10 @@
 """
-Config Script - Loaded upon app initialization
+Configs for the portfolio app
 
-Developed by Selman Tabet @ https://selman.io/
+Developed by Jerry Yu @ https://github.com/jeyu54217
 ------------------------------------------------
 Developed for Coursework 2 of the CMT120 course at Cardiff University
 
-Based on a config script that I developed during my time as the architect
-of the Shopify Integration Gateway for Snoonu Qatar's Fleet Management System (FalconFlex)
 """
 from pathlib import Path
 from dotenv import load_dotenv

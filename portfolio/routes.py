@@ -79,7 +79,7 @@ def edu_edit():
                            )
 
 
-# EDIT EDUCATION
+# EDIT EXPERIENCE
 @app.route("/exp_edit", methods=['GET', 'POST'])
 @login_required
 def exp_edit():
@@ -105,7 +105,7 @@ def exp_edit():
                            )
 
 
-# DELETE EDUCATION
+# DELETE EXPERIENCE
 @app.route('/delete_experience', methods=['POST'])
 @login_required
 def delete_experience():
@@ -118,7 +118,7 @@ def delete_experience():
     return redirect(url_for('exp_edit'))
 
 
-# DELETE EXPERIENCE
+# DELETE EDUCATION
 @app.route('/delete_education', methods=['POST'])
 @login_required
 def delete_education():

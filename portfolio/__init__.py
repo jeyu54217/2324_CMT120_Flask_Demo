@@ -45,10 +45,3 @@ else:
     print(f"*** The app is connected to {app.config['SQLALCHEMY_DATABASE_URI']} ***")
 
 
-from .models import User
-@login_manager.user_loader # This callback is used to reload the user object from the user ID stored in the session.
-def load_user(user_id):
-    """
-    Load a user from the database based on the user_id stored in the session.
-    """
-    return User.query.get(int(user_id))

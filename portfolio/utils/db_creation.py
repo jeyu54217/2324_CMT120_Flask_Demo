@@ -15,10 +15,11 @@ from dotenv import load_dotenv
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
+
 from portfolio import app, db
 from portfolio.models import User, Education, Experience #, Msg_board
 
-
+# Optional
 def load_env_vars():
     """
     Initializes the environment variables from the .env file.
@@ -42,6 +43,7 @@ def create_db():
     except Exception as e:
         print(f"*** Error when creating database: {e} ***")
         
+
 def create_admin_user():
     """
     Creates an admin user if it doesn't already exist in the database.
@@ -124,7 +126,8 @@ def create_exp():
         print("*** test exp data created! ***")
     except Exception as e:
         print(f"*** Error when creating test exp data: {e} ***")
-    
+
+# Still in processing
 def create_msg():
     """
     Creates test message data and adds it to the database.

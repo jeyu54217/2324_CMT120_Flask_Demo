@@ -16,7 +16,7 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 from portfolio import app, db
-from portfolio.models import User, Education, Experience, Msg_board
+from portfolio.models import User, Education, Experience #, Msg_board
 
 
 def load_env_vars():

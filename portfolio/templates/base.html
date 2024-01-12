@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html data-bs-theme="{{session['mode']}}">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel=stylesheet type=text/css href="{{ url_for('static',filename='style.css') }}">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}"/>
+    <title>Portfolio</title>
+  </head>
 
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="{{ url_for('home') }}">
+            <!-- Logo -->
+            <img src="{{ url_for('static', filename='img/logo.jpg') }}" 
+            alt="Logo" width="30" height="30" 
+            class="d-inline-block align-text-top rounded"/>
+            Portfolio for CMT120 Assignment
+        </a>
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Toggler Buttons-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
+            </li>
+            {% if not (current_user.is_authenticated)%}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+            {% endif %}
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Flash alert -->
+    <div id="content" class="container position-relative vstack gap-2 col-md-7 mx-auto">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" id="flash-message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    <!-- Dynamic Content -->
+    <div id="content" class="container position-relative vstack gap-2 col-md-7 mx-auto">
+      <br>
+      {% block content %}   {% endblock %}
+    </div>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='portgolio.js') }}"></script>
+  </body>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center">&copy; 2024 - 
+                    <a href="https://github.com/jeyu54217" class="button">Jerry Yu</a> All rights reserved.
+                </p>
+            </div>
+        </div>
+    </div>
+  </footer>
+</html>

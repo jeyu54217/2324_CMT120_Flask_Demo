@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 class="mx-auto">EDUCATION</h3>
+{% if not edus %}
+    <p class="mx-auto">No education added yet.</p>
+{% else %}
+    <form method="POST" action="{{ url_for('delete_education') }}">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Degree</th>
+                    <th>Start Year</th>
+                    <th>End Year</th>
+                    <th>School</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for edu in edus %}
+                <tr>
+                    <td><input type="checkbox" name="selected" value="{{ edu.id }}"></td>
+                    <td>{{ edu.degree }}</td>
+                    <td>{{ edu.start_date }}</td>
+                    <td>{{ edu.start_date }}</td>
+                    <td>{{ edu.school }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+    </form>
+{% endif %}
+
+
+<!-- Add Education Form -->
+<h3 class="mx-auto">ADD MORE HERE</h3>
+<form method="POST" class="form-group">
+    {{ edu_form.hidden_tag() }}
+    <label for="start_date">Start Date:</label>
+    {{ edu_form.start_date(class="form-control") }}
+    <label for="end_date">End Date:</label>
+    {{ edu_form.end_date(class="form-control") }}
+    <label for="school">School:</label>
+    {{ edu_form.school(class="form-control") }}
+    <label for="degree">Degree:</label>
+    {{ edu_form.degree(class="form-control") }}
+    <label for="description">Description:</label>
+    {{ edu_form.description(class="form-control") }}
+    <div class="d-flex justify-content-end">
+         {{ edu_form.submit(class="btn btn-primary mt-3", value="Submit") }}
+    </div>
+</form>
+
+
+
+
+
+
+{% endblock content %}

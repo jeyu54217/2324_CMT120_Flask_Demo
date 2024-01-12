@@ -18,25 +18,25 @@ class Login_form(FlaskForm):
     submit = SubmitField('Login')
 
 class Edu_form(FlaskForm):
-    start_date = DateField('Start_date', validators=[DataRequired()], format='%Y-%m')
-    end_date = DateField('End_date', validators=[DataRequired()], format='%Y-%m')
+    start_date = DateField('Start_date', validators=[DataRequired()] )
+    end_date = DateField('End_date', validators=[DataRequired()])
     school = StringField('School', validators=[DataRequired()])
     degree = StringField('Degree', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
     submit = SubmitField('Submit Education')
 
 class Exp_form(FlaskForm):
-    start_date = DateField('Start_date', validators=[DataRequired()], format='%Y-%m')
-    end_date = DateField('End_date', validators=[DataRequired()], format='%Y-%m')
+    start_date = DateField('Start_date', validators=[DataRequired()])
+    end_date = DateField('End_date', validators=[DataRequired()] )
     company = StringField('Company', validators=[DataRequired()])
     position = StringField('Position', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
     submit = SubmitField('Submit Experience')
 
-class Msg_form(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    title = StringField('Title', validators=[DataRequired()])
-    content = StringField('Content', validators=[DataRequired()])
-    create_date = DateField('Create Date', validators=[DataRequired()])
-    submit = SubmitField('Submit Message')
+# class Msg_form(FlaskForm):
+#     name = StringField('Name', validators=[DataRequired()])
+#     title = StringField('Title', validators=[DataRequired()])
+#     content = StringField('Content', validators=[DataRequired()])
+#     create_date = DateField('Create Date', validators=[DataRequired()])
+#     submit = SubmitField('Submit Message')
 

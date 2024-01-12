@@ -5,22 +5,21 @@ Developed by Jerry Yu @ https://github.com/jeyu54217
 ------------------------------------------------
 Developed for Coursework 2 of the CMT120 course at Cardiff University
 
-This script is designed to generate test data for the database, intended for development purposes.
+This script is designed to generate test data for the database.
 """
-import sys
-from pathlib import Path
 import time
 import datetime
 from dotenv import load_dotenv
 
 # Include the parent directory of the current file's directory.
+import sys
+from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 from portfolio import app, db
 from portfolio.models import User, Education, Experience, Msg_board
 
 
-
-def init_env_vars():
+def load_env_vars():
     """
     Initializes the environment variables from the .env file.
     """
@@ -72,20 +71,19 @@ def create_edu():
         test_edu_1 = Education(
             start_date = "2009-09",
             end_date = "2013-06",
-            school = "Thung Hei University",
+            school = "Thung Hai University, Taiwan",
             degree = "Bachelor of Arts",
             description = "This is an example education in Thung Hei University",
             user_id = 1,
         )
         test_edu_2 = Education(
-            start_date = "2023-09",
-            end_date = "2024-06",
-            school = "Cardiff University",
+            start_date = "2023-09-01",
+            end_date = "2024-06-01",
+            school = "Cardiff University, UK",
             degree = "Master of Science",
             description = "This is an example education in Cardiff University",
             user_id = 1,
         )
-        
         for i in (test_edu_1, test_edu_2):
             db.session.add(i)
             time.sleep(0.2)
@@ -103,8 +101,8 @@ def create_exp():
     """
     try:
         test_exp_1 = Experience(
-            start_date="2021-02",
-            end_date="2022-03",
+            start_date="2021-02-01",
+            end_date="2022-03-01",
             company="FUCO",
             position="Assistant Software Engineer",
             description="This is an example experience in FUCO",
@@ -162,12 +160,12 @@ def main():
     The main function of the script.
     """
     with app.app_context():
-        # init_env_vars()
+        # load_env_vars()
         create_db()
         create_admin_user()
         create_edu()
         create_exp()
-        create_msg()
+        # create_msg()
 
 if __name__ == "__main__":
     main()

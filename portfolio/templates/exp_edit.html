@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="mx-auto">EXPERIENCE</h3>
+{% if not exps %}
+    <p class="mx-auto">No experience added yet.</p>
+{% else %}
+    <form method="POST" action="{{ url_for('delete_experience') }}">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Position</th>
+                    <th>Start Year</th>
+                    <th>End Year</th>
+                    <th>Company</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exp in exps %}
+                <tr>
+                    <td><input type="checkbox" name="selected" value="{{ exp.id }}"></td>
+                    <td>{{ exp.position }}</td>
+                    <td>{{ exp.start_date }}</td>
+                    <td>{{ exp.end_date }}</td>
+                    <td>{{ exp.company }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+    </form>
+{% endif %}
+
+<!-- Add Experience Form -->
+<h3 class="mx-auto">ADD MORE HERE</h3>
+<form method="POST" class="form-group">
+    {{ exp_form.hidden_tag() }}
+    <label for="start_date">Start Date:</label>
+    {{ exp_form.start_date(class="form-control") }}
+    <label for="end_date">End Date:</label>
+    {{ exp_form.end_date(class="form-control") }}
+    <label for="company">Company:</label>
+    {{ exp_form.company(class="form-control") }}
+    <label for="position">Position:</label>
+    {{ exp_form.position(class="form-control") }}
+    <label for="description">Description:</label>
+    {{ exp_form.description(class="form-control") }}
+    <div class="d-flex justify-content-end">
+         {{ exp_form.submit(class="btn btn-primary mt-3", value="Submit") }}
+    </div>
+</form>
+{% endblock content %}

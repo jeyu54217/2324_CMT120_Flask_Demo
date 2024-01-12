@@ -8,16 +8,15 @@ Developed for Coursework 2 of the CMT120 course at Cardiff University
 Reference:
     1. flask_login: https://flask.palletsprojects.com/en/2.0.x/patterns/sqlalchemy/ 
 """
-import sys
+
 import os
-from pathlib import Path
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from pathlib import Path
+from .config import Config
 
-# Include the parent directory of the current file's directory.
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-from config import Config
+BASE_DIR = Path(__file__).resolve().parent.absolute()
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -28,6 +27,13 @@ login_manager = LoginManager()
 login_manager.login_view = 'login'  # Tells Flask-Login where to redirect users who attempt to access restricted pages while not logged in.
 login_manager.init_app(app)
 
+app.config['SECRET_KEY'] = "123"
+
+# In case of cicular import, import the blueprint after the app is initialized.
+from .routes import bp_home
+app.register_blueprint(bp_home)
+
+
 if os.environ.get("ENV_TYPE") == "PROD":
     print("*** Now the app is on the PROD mode ***")
     print(f"*** The app is connected to MySQL server: {os.environ['MYSQL_DB_NAME']} on {os.environ['MYSQL_ADDRESS']} ***")
@@ -37,3 +43,12 @@ elif os.environ.get("ENV_TYPE") == "DEV":
 else:
     print("*** Now the app is on the LOCAL mode ***")
     print(f"*** The app is connected to {app.config['SQLALCHEMY_DATABASE_URI']} ***")
+
+
+from .models import User
+@login_manager.user_loader # This callback is used to reload the user object from the user ID stored in the session.
+def load_user(user_id):
+    """
+    Load a user from the database based on the user_id stored in the session.
+    """
+    return User.query.get(int(user_id))

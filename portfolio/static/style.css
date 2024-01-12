@@ -1,0 +1,37 @@
+/* In your CSS file */
+.btn-limited {
+    width: 70px;
+    height: 40px;
+    font-size: 15px;
+
+}
+
+.custom-font-size {
+    font-size: 14px;
+}
+
+.table {
+    font-size: 14px;
+}
+.center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+    margin-top: 50px;
+    font-size: 18px;
+}
+
+.footer p {
+    margin-bottom: 0;
+}
+
+.footer .button {
+    color: #007bff;
+    text-decoration: none;
+}
+

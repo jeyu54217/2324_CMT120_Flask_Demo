@@ -1,1 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h3 class="mx-auto">PROFILES</h3>
+    <img src="{{ url_for('static', filename='img/profile.png') }}" 
+        width="200" height="220" 
+        class="d-block mx-auto align-text-top rounded"/>
+    <p class="lead text-center">Hi! This is Jerry, I'm a A full-stack software developer boasting 2 years of industry experience in building data and web applications. I pecialize in Python and Django, and have experience in JavaScript, docker, and AWS.</p>
+
+{% if (current_user.is_authenticated)%}
+    <h3 class="mx-auto">EXPERIENCE</h3>
+    {% if not exps %}
+        <div class="center-text">
+            <p>No experiences yet!</p>
+        </div>
+        <div class="text-end">
+            <a class="btn btn-danger btn-limited" href="{{ url_for('exp_edit') }}" role="button">Add</a>
+        </div>
+    {% else %}
+        {% for exp in exps %}
+        <li class="custom-font-size"><strong><span style="color: blue;">{{ exp.position }}</span></strong> from <strong><span style="color: blue;">{{ exp.start_date }}</span></strong> to <strong><span style="color: blue;">{{ exp.end_date }}</span></strong> at <strong><span style="color: blue;">{{ exp.company }}</span></strong></li>
+        {% endfor %}
+        <div class="text-end">
+            <a class="btn btn-danger btn-limited" href="{{ url_for('exp_edit') }}" role="button">EDIT</a>
+        </div>
+    {% endif %}
+    <br>
+    <h3 class="mx-auto">EDUCATION</h3>
+    {% if not edus %}
+        <div class="center-text">
+            <p>No education yet!</p>
+        </div>
+        <div class="text-end">
+            <a class="btn btn-danger btn-limited" href="{{ url_for('edu_edit') }}" role="button">Add</a>
+        </div>
+        {% else %}
+        {% for edu in edus %}
+        <li class="custom-font-size"><strong><span style="color: blue;">{{ edu.degree }}</span></strong> from <strong><span style="color: blue;">{{ edu.start_date }}</span></strong> to <strong><span style="color: blue;">{{ edu.end_date }}</span></strong> at <strong><span style="color: blue;">{{ edu.school }}</span></strong></li>
+        {% endfor %}
+        <div class="text-end">
+        <a class="btn btn-danger btn-limited" href="{{ url_for('edu_edit') }}" role="button">EDIT</a>
+        </div>
+    {% endif %}
+
+{% else %}
+    <h3 class="mx-auto">EXPERIENCE</h3>
+    {% if not exps %}
+        <div class="center-text">
+            <p>No experiences yet!</p>
+        </div>
+    {% else %}
+        {% for exp in exps %}
+        <li class="custom-font-size"><strong><span style="color: blue;">{{ exp.position }}</span></strong> from <strong><span style="color: blue;">{{ exp.start_date }}</span></strong> to <strong><span style="color: blue;">{{ exp.end_date }}</span></strong> at <strong><span style="color: blue;">{{ exp.company }}</span></strong></li>
+        {% endfor %}
+    {% endif %}
+    <br>
+    <h3 class="mx-auto">EDUCATION</h3>
+    {% if not edus %}
+        <div class="center-text">
+            <p>No education yet!</p>
+        </div>
+    {% else %}
+        {% for edu in edus %}
+        <li class="custom-font-size"><strong><span style="color: blue;">{{ edu.degree }}</span></strong> from <strong><span style="color: blue;">{{ edu.start_date }}</span></strong> to <strong><span style="color: blue;">{{ edu.end_date }}</span></strong> at <strong><span style="color: blue;">{{ edu.school }}</span></strong></li>
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
+
+{% endblock content %}
 
